@@ -69,4 +69,41 @@ class HierarchyTransformerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testSolveEmptyHierarchy()
+    {
+        $this->assertEquals([], $this->transformer->denormalize([]));
+    }
+
+    public function testSolveSingleHierarchy()
+    {
+        $this->assertEquals(
+            ['nick' => ['pete' => []]],
+            $this->transformer->denormalize([
+                'pete' => 'nick'
+            ])
+        );
+    }
+
+    public function testSolveDoubleHierarchy()
+    {
+        $this->assertEquals(
+            ['nick' => ['pete' => [], 'barbara' => []]],
+            $this->transformer->denormalize([
+                'pete' => 'nick',
+                'barbara' => 'nick',
+            ])
+        );
+    }
+
+    public function testSolveComplexHierarchy()
+    {
+        $this->assertEquals(
+            ['sophie' => ['nick' => ['pete' => [], 'barbara' => []]]],
+            $this->transformer->denormalize([
+                'pete' => 'nick',
+                'barbara' => 'nick',
+                'nick' => 'sophie',
+            ])
+        );
+    }
 }

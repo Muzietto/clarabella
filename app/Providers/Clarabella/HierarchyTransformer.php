@@ -48,12 +48,50 @@ class HierarchyTransformer
                 return $this->append($newLabel, $parentLabel, $subtree);
             }
 
-            var_dump($subtree);
-
             return $subtree;
         }, $node[$label]);
 
         return $result;
+    }
+
+    public function denormalize($tree)
+    {
+        if (empty($tree)) {
+            return [];
+        }
+
+        $input = $this->serialize($tree);
+
+        $firstBossName = $input[0][1];
+        $firstEmployeeName = $input[0][0];
+
+        $firstBossObj[$firstBossName] = [$firstEmployeeName => []];
+
+        if (count($input) === 1) {
+            return $firstBossObj;
+        }
+
+        return $this->denorm(array_slice($input, 1), $firstBossObj);
+    }
+
+    private function denorm($relationships, $resultTree)
+    {
+        if (empty($relationships)) {
+            return $resultTree;
+        }
+
+        $bossName = $relationships[0][1];
+        $employeeName = $relationships[0][0];
+        $topDogName = $this->label($resultTree);
+
+        if ($topDogName === $employeeName) {
+            $nextRelationship[$bossName] = $resultTree;
+            return $this->denorm(array_slice($relationships, 1), $nextRelationship);
+        }
+
+        $nextResultTree = $this->append($employeeName, $bossName, $resultTree);
+
+        return $this->denorm(array_slice($relationships, 1), $nextResultTree);
     }
 
     private function label(array $node)
