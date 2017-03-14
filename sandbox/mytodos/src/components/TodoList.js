@@ -12,7 +12,8 @@ import Todo from './Todo'
 // onTodoClick mentioned also in VisibleTodoList
 //const TodoList = function(todos, onTodoClick) { // trying to follow the book
 // const TodoList = function(xxx) { // using the only param sent here (gotta use it inside the function body)
-const TodoList = ({todos, onTodoClick}) => ( // ES6 destructuring
+const TodoList = ({todos, onTodoClick}) => {
+  return (
     <ul>
       {todos.map(todo =>
           <Todo
@@ -23,6 +24,7 @@ const TodoList = ({todos, onTodoClick}) => ( // ES6 destructuring
       )}
     </ul>
   )
+}
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({

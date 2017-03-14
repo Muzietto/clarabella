@@ -9,7 +9,8 @@
 // default exports do not require {}
 import React, { PropTypes } from 'react'
 
-const Todo = ({onClick, completed, text}) => ( // ES6 destructuring
+const Todo = ({onClick, completed, text}) => {
+  return (
     <li
       onClick={onClick}
       style={{
@@ -17,6 +18,7 @@ const Todo = ({onClick, completed, text}) => ( // ES6 destructuring
       }}
     >{text}</li>
   )
+}
 
 Todo.propTypes = {
   onClick: PropTypes.func.isRequired,
