@@ -4,9 +4,9 @@
 let nextTodoId = 0 // closing in...
 
 // action types
-export const ADD_TODO = 'ADD_TODO'
-export const TOGGLE_TODO = 'TOGGLE_TODO'
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+let ADD_TODO = 'ADD_TODO'
+let TOGGLE_TODO = 'TOGGLE_TODO'
+let SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 export const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
@@ -21,7 +21,7 @@ export const ActionTypes = {
 }
 
 // actually these funs are ACTION CREATORS
-export const addTodo = text => { 
+let addTodo = text => { 
   return {
     type: ADD_TODO,
     id: nextTodoId++,
@@ -29,14 +29,14 @@ export const addTodo = text => {
   }
 }
 
-export const toggleTodo = id => { 
+let toggleTodo = id => { 
   return {
     type: TOGGLE_TODO,
     id
   }
 }
 
-export const setVisibilityFilter = filter => {
+let setVisibilityFilter = filter => {
   return {
     type: SET_VISIBILITY_FILTER,
     filter

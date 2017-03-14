@@ -1,7 +1,7 @@
 // this is for REDUCERS
 import { VisibilityFilters, ActionTypes } from '../actions'
 
-const initialState = {
+export const initialState = {
   todos: [],
   visibilityFilter: VisibilityFilters.SHOW_ALL,
 }
@@ -15,12 +15,15 @@ export function todoApp(state, action) {
   switch (action.type) {
     case ActionTypes.SET_VISIBILITY_FILTER: {
       newState.visibilityFilter = action.filter
+      break
     }
     case ActionTypes.ADD_TODO:
     case ActionTypes.TOGGLE_TODO: {
       newState.todos = handleTodos(newState.todos, action)
+      break
     }
     default: {
+      break
     }
   }
   return newState
@@ -35,12 +38,15 @@ export function handleTodos(todos, action) {
         test: action.text,
         completed: false
       })
+      break
     }
     case ActionTypes.TOGGLE_TODO: {
       let todo = todos.find(td => td.id === action.id)
       todo.completed = !todo.completed
+      break
     }
     default: {
+      break
     }
   }
   return todos  
