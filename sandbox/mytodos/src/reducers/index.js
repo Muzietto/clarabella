@@ -35,7 +35,7 @@ export function handleTodos(todos, action) {
     case ActionTypes.ADD_TODO: {
       todos.push({
         id: action.id,
-        test: action.text,
+        text: action.text,
         completed: false
       })
       break
