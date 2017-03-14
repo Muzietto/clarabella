@@ -4,25 +4,15 @@ namespace App\Providers\Clarabella;
 
 use Illuminate\Support\ServiceProvider;
 
-class HierarchyTransformer extends ServiceProvider
+class HierarchyTransformer
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function serialize(array $dictionary)
     {
-        //
-    }
+        $serialized = [];
+        foreach ($dictionary as $key => $value) {
+            $serialized[] = [$key, $value];
+        }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
+        return $serialized;
     }
 }
