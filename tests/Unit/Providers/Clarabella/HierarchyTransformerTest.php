@@ -38,4 +38,35 @@ class HierarchyTransformerTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testAppendLeaves()
+    {
+        $this->assertEquals(
+            [
+                'a' => ['c' => []]
+            ],
+            $this->transformer->append('c', 'a', ['a' => []])
+        );
+    }
+
+    public function testAppendLeaves2()
+    {
+        $this->assertEquals(
+            [
+                'a' => ['b' => [], 'c' => []]
+            ],
+            $this->transformer->append('c', 'a', ['a' => ['b' => []]])
+        );
+    }
+
+    public function testAppend3()
+    {
+        $this->assertEquals(
+            [
+                'a' => ['b' => ['d' => ['f' => []]], 'c' => ['e' => []]]
+            ],
+            $this->transformer->append('f', 'd', ['a' => ['b' => ['d' => []], 'c' => ['e' => []]]])
+        );
+    }
+
 }

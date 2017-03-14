@@ -19,6 +19,10 @@ class HierarchyTransformer
 
     public function found($newLabel, array $node)
     {
+        if (empty($node)) {
+            return false;
+        }
+
         if ($this->label($node) === $newLabel) {
             return true;
         }
@@ -28,14 +32,32 @@ class HierarchyTransformer
         });
     }
 
+    public function append($newLabel, $parentLabel, array $node)
+    {
+        $result = $node;
+        $label = $this->label($node);
+
+        if ($label === $parentLabel) {
+            $node[$label] += [$newLabel => []];
+
+            return $node;
+        }
+
+        $result[$label] = array_map(function($subtree) use ($newLabel, $parentLabel) {
+            if ($this->found($parentLabel, $subtree)) {
+                return $this->append($newLabel, $parentLabel, $subtree);
+            }
+
+            var_dump($subtree);
+
+            return $subtree;
+        }, $node[$label]);
+
+        return $result;
+    }
+
     private function label(array $node)
     {
         return array_keys($node)[0];
-    }
-
-    private function children(array $node)
-    {
-        return array_pop($node);
-        return array_values($node)[0];
     }
 }
