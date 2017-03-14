@@ -28,4 +28,14 @@ class HierarchyTransformerTest extends \PHPUnit_Framework_TestCase
             ])
         );
     }
+
+    public function testCanFindNodes()
+    {
+        $this->assertTrue(
+            $this->transformer->found(
+                'c',
+                ['a' => ['b' => ['c' => []]]]
+            )
+        );
+    }
 }

@@ -136,8 +136,7 @@ return [
     */
 
     'providers' => [
-        
-        App/Providers/Clarabella/HierarchyTransformer::class,
+        /* App\Providers\Clarabella\HierarchyTransformer::class, */
 
         /*
          * Laravel Framework Service Providers...
